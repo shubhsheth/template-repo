@@ -1,1 +1,0 @@
-# careerplug-mcp
