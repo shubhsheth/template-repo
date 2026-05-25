@@ -18,7 +18,8 @@ Each slice follows this pattern:
 2. Run the test suite
 3. Confirm the slice works as expected
 4. Commit with a descriptive message
-5. Proceed to the next slice
+5. Check spec drift: if this increment changed any assumption, boundary, or requirement, update the spec file before proceeding
+6. Proceed to the next slice
 
 ## Slicing Approaches
 

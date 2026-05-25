@@ -20,15 +20,58 @@ Write a structured specification before writing any code. The spec is the shared
 
 ## The Gated Workflow
 
-Spec-driven development has four phases. Do not advance to the next phase until the current one is validated.
+This skill owns the **SPECIFY** phase. After human approval, hand off to `planning-and-task-breakdown` for PLAN and TASKS, then to `incremental-implementation` for IMPLEMENT.
 
 ```
-SPECIFY ──→ PLAN ──→ TASKS ──→ IMPLEMENT
-   │          │        │          │
-   ▼          ▼        ▼          ▼
- Human      Human    Human      Human
- reviews    reviews  reviews    reviews
+SPECIFY ──────────────→ planning-and-task-breakdown ──→ incremental-implementation
+   │                              │                              │
+   ▼                              ▼                              ▼
+ Human                          Human                          Human
+ reviews                        reviews                        reviews
 ```
+
+Do not advance to the next phase until the current one is validated by the human.
+
+## Choose: Full Spec or Lightweight Spec
+
+Before writing anything, determine which spec format is appropriate.
+
+**Use the lightweight spec when all three are true:**
+1. Requirements are clear — no significant ambiguity, no open architectural questions
+2. The change is multi-file but bounded (estimated under 30 minutes)
+3. No new external dependencies, schema changes, or API contracts involved
+
+**Use the full spec for everything else** — new projects, ambiguous requirements, architectural decisions, or anything that would take more than 30 minutes.
+
+Ask the human to confirm which path is appropriate before proceeding.
+
+---
+
+## Lightweight Spec
+
+For medium-complexity tasks that don't warrant the full template. Three sections only:
+
+```markdown
+# Spec: [Feature Name]
+
+## Objective
+
+[What we're building and why. One short paragraph.]
+
+## Success Criteria
+
+[How we'll know this is done — specific, testable, technology-agnostic conditions.]
+
+## Out of Scope
+
+[Explicit exclusions for this iteration.]
+```
+
+Once the human approves the lightweight spec, hand off directly to `planning-and-task-breakdown`.
+
+---
+
+## Full Spec
 
 ### Phase 1: Specify
 
@@ -45,9 +88,9 @@ ASSUMPTIONS I'M MAKING:
 → Correct me now or I'll proceed with these.
 ```
 
-Don't silently fill in ambiguous requirements. "The spec's entire purpose is to surface misunderstandings _before_ code gets written — assumptions are the most dangerous form of misunderstanding."
+Don't silently fill in ambiguous requirements. The spec's entire purpose is to surface misunderstandings _before_ code gets written — assumptions are the most dangerous form of misunderstanding.
 
-**Handle mid-spec ambiguity with `[NEEDS CLARIFICATION]` markers.** When a requirement is unclear but not blocking enough to stop writing, embed the marker inline and keep going. Cap at **3 markers per spec** — more than 3 means you should stop and ask the human before continuing. When presenting markers for resolution, use a table:
+**Handle mid-spec ambiguity with `[NEEDS CLARIFICATION]` markers.** When a requirement is unclear but not blocking enough to stop writing, embed the marker inline and keep going. Cap at **3 markers per spec** — more than 3 means stop and ask the human before continuing. When presenting markers for resolution, use a table:
 
 ```
 | # | Question | Options | Implication if left open |
@@ -92,7 +135,7 @@ Replace all markers before the spec advances to the PLAN phase.
    - **Ask first:** Database schema changes, adding dependencies, changing CI config
    - **Never do:** Commit secrets, edit vendor directories, remove failing tests without approval
 
-**Spec template:**
+**Full spec template:**
 
 ```markdown
 # Spec: [Project/Feature Name]
@@ -169,8 +212,6 @@ REFRAMED SUCCESS CRITERIA:
 → Are these the right targets?
 ```
 
-This lets you loop, retry, and problem-solve toward a clear goal rather than guessing what "faster" means.
-
 **Success criteria must be technology-agnostic.** Describe observable user outcomes, not implementation choices:
 
 | Bad (tech-coupled)       | Good (user-focused)                                                 |
@@ -178,50 +219,6 @@ This lets you loop, retry, and problem-solve toward a clear goal rather than gue
 | "Uses Redis for caching" | "Search returns in < 300ms for 95% of queries"                      |
 | "Migrates to PostgreSQL" | "All existing user data is preserved and queryable after migration" |
 | "Implements React Query" | "UI reflects server state within 2 seconds of a background update"  |
-
-### Phase 2: Plan
-
-With the validated spec, generate a technical implementation plan:
-
-1. Identify the major components and their dependencies
-2. Determine the implementation order (what must be built first)
-3. Note risks and mitigation strategies
-4. Identify what can be built in parallel vs. what must be sequential
-5. Define verification checkpoints between phases
-
-The plan should be reviewable: the human should be able to read it and say "yes, that's the right approach" or "no, change X."
-
-### Phase 3: Tasks
-
-Break the plan into discrete, implementable tasks:
-
-- Each task should be completable in a single focused session
-- Each task has explicit acceptance criteria
-- Each task includes a verification step (test, build, manual check)
-- Tasks are ordered by dependency, not by perceived importance
-- No task should require changing more than ~5 files
-
-**Task template:**
-
-```markdown
-- [ ] Task: [Description]
-  - Acceptance: [What must be true when done]
-  - Verify: [How to confirm — test command, build, manual check]
-  - Files: [Which files will be touched]
-```
-
-**Every task list must end with a documentation update task:**
-
-```markdown
-- [ ] Task: Update Documentation
-  - Acceptance: `AGENTS.md` updated to reflect any new commands, endpoints, models, or boundaries introduced by this feature; relevant `docs/` files updated or created to describe new behavior; no stale references remain in either file
-  - Verify: Review `AGENTS.md` and affected `docs/*.md` for accuracy
-  - Files: `AGENTS.md`, `docs/<relevant>.md`
-```
-
-### Phase 4: Implement
-
-Execute tasks one at a time following `incremental-implementation` and `test-driven-development` skills. Use `context-engineering` to load the right spec sections and source files at each step rather than flooding the agent with the entire spec. The final task of every implement phase is always to update `AGENTS.md` and relevant `docs/` files.
 
 ## Keeping the Spec Alive
 
@@ -232,11 +229,13 @@ The spec is a living document, not a one-time artifact:
 - **Commit the spec** — The spec belongs in version control alongside the code.
 - **Reference the spec in PRs** — Link back to the spec section that each PR implements.
 
+See also: `incremental-implementation` has a per-increment spec drift checkpoint that keeps the spec current during execution.
+
 ## Common Rationalizations
 
 | Rationalization                       | Reality                                                                                                 |
 | ------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| "This is simple, I don't need a spec" | Simple tasks don't need _long_ specs, but they still need acceptance criteria. A two-line spec is fine. |
+| "This is simple, I don't need a spec" | Simple tasks don't need _long_ specs, but they still need acceptance criteria. The lightweight path exists for this. |
 | "I'll write the spec after I code it" | That's documentation, not specification. The spec's value is in forcing clarity _before_ code.          |
 | "The spec will slow us down"          | A 15-minute spec prevents hours of rework. Waterfall in 15 minutes beats debugging in 15 hours.         |
 | "Requirements will change anyway"     | That's why the spec is a living document. An outdated spec is still better than no spec.                |
@@ -252,8 +251,15 @@ The spec is a living document, not a one-time artifact:
 
 ## Verification
 
-This is a quality gate — do not advance to PLAN until every item is checked.
+Quality gate — do not hand off to `planning-and-task-breakdown` until every applicable item is checked.
 
+**For lightweight spec:**
+- [ ] Human confirmed lightweight path is appropriate
+- [ ] Objective, Success Criteria, and Out of Scope are all present
+- [ ] Success criteria are specific, testable, and technology-agnostic
+- [ ] The spec is saved to a file in the repository
+
+**For full spec:**
 - [ ] The spec covers all six core areas
 - [ ] The human has reviewed and approved the spec
 - [ ] Success criteria are specific, testable, and technology-agnostic

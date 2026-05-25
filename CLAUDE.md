@@ -8,7 +8,7 @@ Behavioral guidelines to reduce common LLM coding mistakes. Merge with project-s
 
 **Before implementing any feature, run the spec skill.**
 
-Whenever asked to build, implement, add, or create a new feature, ALWAYS invoke the `spec-driven-development` skill first by calling `/spec-driven-development` before writing any code. Do not skip this step even if the requirements seem clear.
+Invoke the `spec-driven-development` skill before writing any code for new features. The skill defines when a full spec, a lightweight spec, or no spec is needed — defer to its **When to Use** criteria rather than applying it unconditionally.
 
 ### Spec File Naming & Structure
 
