@@ -38,7 +38,7 @@ Before writing anything, determine which spec format is appropriate.
 
 **Use the lightweight spec when all three are true:**
 1. Requirements are clear — no significant ambiguity, no open architectural questions
-2. The change is multi-file but bounded (estimated under 30 minutes)
+2. The change is bounded — single-file non-trivial or multi-file (estimated under 30 minutes)
 3. No new external dependencies, schema changes, or API contracts involved
 
 **Use the full spec for everything else** — new projects, ambiguous requirements, architectural decisions, or anything that would take more than 30 minutes.
@@ -257,14 +257,14 @@ Quality gate — do not hand off to `planning-and-task-breakdown` until every ap
 - [ ] Human confirmed lightweight path is appropriate
 - [ ] Objective, Success Criteria, and Out of Scope are all present
 - [ ] Success criteria are specific, testable, and technology-agnostic
-- [ ] The spec is saved to a file in the repository
+- [ ] The spec is saved to `spec/NNN-slug/NNN-slug-requirements.md`
 
 **For full spec:**
 - [ ] The spec covers all six core areas
 - [ ] The human has reviewed and approved the spec
 - [ ] Success criteria are specific, testable, and technology-agnostic
 - [ ] Boundaries (Always/Ask First/Never) are defined
-- [ ] The spec is saved to a file in the repository
+- [ ] The spec is saved to `spec/NNN-slug/NNN-slug-requirements.md`
 - [ ] Functional requirements are numbered (FR-1, FR-2…) so tasks can reference them
 - [ ] Out of Scope section exists with at least one explicit exclusion
 - [ ] No `[NEEDS CLARIFICATION]` markers remain

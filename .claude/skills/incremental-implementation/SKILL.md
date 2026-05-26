@@ -18,7 +18,7 @@ Each slice follows this pattern:
 2. Run the test suite
 3. Confirm the slice works as expected
 4. Commit with a descriptive message
-5. Check spec drift: if this increment changed any assumption, boundary, or requirement, update the spec file before proceeding
+5. Check spec drift: if a spec file exists (`spec/NNN-slug/`) and this increment changed any assumption, boundary, or requirement, update the spec file and notify the human before proceeding to the next slice
 6. Proceed to the next slice
 
 ## Slicing Approaches

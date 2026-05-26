@@ -7,6 +7,8 @@ description: Decompose a validated spec into an implementation plan and task lis
 
 This skill owns the **PLAN** and **TASKS** phases of the spec-driven workflow. It receives a validated, human-approved spec from `spec-driven-development` as its input. Do not begin planning without a spec — planning without one produces tasks that solve the wrong problem.
 
+Find the spec at `spec/NNN-slug/NNN-slug-requirements.md` (naming convention from CLAUDE.md). The spec may be a **full spec** (with Functional Requirements FR-N, Tech Stack, Boundaries, etc.) or a **lightweight spec** (Objective, Success Criteria, Out of Scope only). Adjust your approach accordingly — lightweight specs have no FR-N items; use Success Criteria as the source of truth for task coverage instead.
+
 ## When to Use
 
 - A spec exists and has been approved by the human
@@ -63,9 +65,9 @@ Break the approved plan into discrete, implementable tasks.
 
 ```markdown
 - [ ] Task: Update documentation
-  - Acceptance: Any new commands, endpoints, models, or boundaries introduced by this feature are reflected in AGENTS.md and relevant docs/ files; no stale references remain
-  - Verify: Review AGENTS.md and affected docs/*.md for accuracy
-  - Files: AGENTS.md, docs/<relevant>.md
+  - Acceptance: Any new commands, endpoints, models, or boundaries introduced by this feature are reflected in CLAUDE.md and relevant docs/ files; no stale references remain
+  - Verify: Review CLAUDE.md and affected docs/*.md for accuracy
+  - Files: CLAUDE.md, docs/<relevant>.md
   - Size: XS
 ```
 
@@ -73,7 +75,7 @@ Break the approved plan into discrete, implementable tasks.
 
 Before handing off to `incremental-implementation`, verify:
 
-- [ ] Every spec functional requirement (FR-N) maps to at least one task
+- [ ] Every spec functional requirement (FR-N) maps to at least one task *(skip for lightweight specs — verify against Success Criteria instead)*
 - [ ] Every task has acceptance criteria and a verification step
 - [ ] Tasks are ordered by dependency (no task requires a later task's output)
 - [ ] No task is sized L or larger
