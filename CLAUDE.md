@@ -8,13 +8,18 @@ Behavioral guidelines to reduce common LLM coding mistakes. Merge with project-s
 
 **Before implementing any feature, run the spec skill.**
 
-Whenever asked to build, implement, add, or create a new feature, ALWAYS invoke the `spec-driven-development` skill first by calling `/spec-driven-development` before writing any code. Do not skip this step even if the requirements seem clear.
+Invoke the `specify` skill before writing any code for new features. The skill defines when a full spec, a lightweight spec, or no spec is needed — defer to its **When to Use** criteria rather than applying it unconditionally.
+
+The workflow has three interaction modes:
+1. **Clarify** — ask the human questions conversationally to establish direction and scope before writing anything
+2. **Build** — once direction is confirmed, write all three spec files autonomously without pausing for review between them
+3. **Implement** — execute one task at a time; present a summary and wait for human approval before each task; on rejection, cascade changes through all three spec files and re-present
 
 ### Spec File Naming & Structure
 
 - Live under `spec/` at the repo root
 - Each feature: `spec/NNN-slug/`
-- Files: `NNN-slug-{requirements,plan,implement}.md`
+- Files: `NNN-slug-{specify,tasks,implement}.md`
 - Increment NNN for each new feature (001, 002, 003…)
 
 ## 1. Think Before Coding
