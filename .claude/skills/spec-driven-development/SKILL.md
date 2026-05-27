@@ -18,19 +18,26 @@ Write a structured specification before writing any code. The spec is the shared
 
 **When NOT to use:** Single-line fixes, typo corrections, or changes where requirements are unambiguous and self-contained.
 
-## The Gated Workflow
+## The Workflow
 
-This skill owns the **SPECIFY** phase. After human approval, hand off to `planning-and-task-breakdown` for PLAN and TASKS, then to `incremental-implementation` for IMPLEMENT.
+This skill owns the **SPECIFY** phase. It runs in two stages:
+
+**Stage 1 — Clarify (interactive):** Ask the human questions conversationally — one or two at a time — to understand scope, direction, and constraints. Iterate until direction is clear. This is the only human gate before writing begins.
+
+**Stage 2 — Build (autonomous):** Once direction is confirmed, write all three spec files in one continuous pass without pausing for review between them.
 
 ```
-SPECIFY ──────────────→ planning-and-task-breakdown ──→ incremental-implementation
-   │                              │                              │
-   ▼                              ▼                              ▼
- Human                          Human                          Human
- reviews                        reviews                        reviews
+  Q&A with human          autonomous
+  ───────────────    ──────────────────────────────────────
+        │
+   [iterates]──→ specify.md ──→ tasks.md ──→ implement.md
+        │                                         │
+      Human                                       ▼
+    confirms                          incremental-implementation
+    direction                         (per-task approval gate)
 ```
 
-Do not advance to the next phase until the current one is validated by the human.
+Hand off to `incremental-implementation` once all three files are written. The next human gate is per-task during implementation, not between spec files.
 
 ## Choose: Full Spec or Lightweight Spec
 
@@ -43,7 +50,7 @@ Before writing anything, determine which spec format is appropriate.
 
 **Use the full spec for everything else** — new projects, ambiguous requirements, architectural decisions, or anything that would take more than 30 minutes.
 
-Ask the human to confirm which path is appropriate before proceeding.
+Resolve which path to use through the Q&A conversation — don't decide unilaterally.
 
 ---
 
@@ -67,7 +74,7 @@ For medium-complexity tasks that don't warrant the full template. Three sections
 [Explicit exclusions for this iteration.]
 ```
 
-Once the human approves the lightweight spec, hand off directly to `planning-and-task-breakdown`.
+Once the lightweight spec is written, immediately write `tasks.md` and `implement.md` without pausing for review.
 
 ---
 
@@ -75,22 +82,24 @@ Once the human approves the lightweight spec, hand off directly to `planning-and
 
 ### Phase 1: Specify
 
-Start with a high-level vision. Ask the human clarifying questions until requirements are concrete.
+**Start with questions, not a spec.** Before writing any content, ask the human one or two targeted questions to understand the most important unknowns. Get answers, then ask follow-up questions if needed. Don't ask more than two questions per turn. Continue until you can answer all three of:
 
-**Surface assumptions immediately.** Before writing any spec content, list what you're assuming:
+- What is the human trying to achieve? (objective + why)
+- What are the hard constraints? (scope, boundaries, out of scope)
+- What does success look like? (criteria)
 
+**Direction is clear enough when** you could write the spec without needing to embed any `[NEEDS CLARIFICATION]` markers for anything load-bearing. At that point, stop asking and start writing.
+
+Example opening:
 ```
-ASSUMPTIONS I'M MAKING:
-1. This is a web application (not native mobile)
-2. Authentication uses session-based cookies (not JWT)
-3. The database is PostgreSQL (based on existing Prisma schema)
-4. We're targeting modern browsers only (no IE11)
-→ Correct me now or I'll proceed with these.
+Before I write the spec, a couple of questions:
+1. Is this a new feature or a change to existing behaviour?
+2. Any hard constraints upfront — timeline, tech stack, or scope limits?
 ```
 
-Don't silently fill in ambiguous requirements. The spec's entire purpose is to surface misunderstandings _before_ code gets written — assumptions are the most dangerous form of misunderstanding.
+Then listen and follow up as needed. Do not silently fill in ambiguous requirements — the spec's purpose is to surface misunderstandings _before_ code is written.
 
-**Handle mid-spec ambiguity with `[NEEDS CLARIFICATION]` markers.** When a requirement is unclear but not blocking enough to stop writing, embed the marker inline and keep going. Cap at **3 markers per spec** — more than 3 means stop and ask the human before continuing. When presenting markers for resolution, use a table:
+**If ambiguity surfaces mid-spec,** use `[NEEDS CLARIFICATION]` markers. Cap at **3 per spec** — more than 3 means stop and ask before continuing. When presenting markers, use a table:
 
 ```
 | # | Question | Options | Implication if left open |
@@ -99,7 +108,7 @@ Don't silently fill in ambiguous requirements. The spec's entire purpose is to s
 | 2 | Is this feature gated by user role? | Yes (admin only) / No (all users) | Changes auth requirements significantly |
 ```
 
-Replace all markers before the spec advances to the PLAN phase.
+Resolve all markers before writing `tasks.md`.
 
 **Write a spec document covering these six core areas:**
 
@@ -251,20 +260,19 @@ See also: `incremental-implementation` has a per-increment spec drift checkpoint
 
 ## Verification
 
-Quality gate — do not hand off to `planning-and-task-breakdown` until every applicable item is checked.
+**Before writing any spec content** — confirm through Q&A:
+- [ ] Objective, constraints, and success criteria are understood
+- [ ] Full spec or lightweight spec path is agreed with the human
+- [ ] No major open questions remain
 
-**For lightweight spec:**
-- [ ] Human confirmed lightweight path is appropriate
-- [ ] Objective, Success Criteria, and Out of Scope are all present
-- [ ] Success criteria are specific, testable, and technology-agnostic
-- [ ] The spec is saved to `spec/NNN-slug/NNN-slug-specify.md`
-
-**For full spec:**
-- [ ] The spec covers all six core areas
-- [ ] The human has reviewed and approved the spec
-- [ ] Success criteria are specific, testable, and technology-agnostic
-- [ ] Boundaries (Always/Ask First/Never) are defined
-- [ ] The spec is saved to `spec/NNN-slug/NNN-slug-specify.md`
-- [ ] Functional requirements are numbered (FR-1, FR-2…) so tasks can reference them
-- [ ] Out of Scope section exists with at least one explicit exclusion
+**Before writing `tasks.md`** — the specify file is complete:
 - [ ] No `[NEEDS CLARIFICATION]` markers remain
+- [ ] Spec is saved to `spec/NNN-slug/NNN-slug-specify.md`
+
+**For full spec only:**
+- [ ] All six core areas are covered
+- [ ] Functional requirements are numbered (FR-1, FR-2…)
+- [ ] Out of Scope section exists with at least one explicit exclusion
+- [ ] Boundaries (Always/Ask First/Never) are defined
+
+After `tasks.md` and `implement.md` are written, hand off directly to `incremental-implementation`. No further human gate here — approval happens per-task during implementation.
