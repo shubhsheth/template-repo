@@ -5,13 +5,13 @@ description: Decompose a validated spec into an implementation plan and task lis
 
 ## Overview
 
-This skill owns the **PLAN** and **TASKS** phases of the spec-driven workflow. It receives a validated, human-approved spec from `spec-driven-development` as its input. Do not begin planning without a spec — planning without one produces tasks that solve the wrong problem.
+This skill owns the **PLAN** and **TASKS** phases of the spec-driven workflow. It runs as part of the autonomous spec-building pass started by `spec-driven-development` — do not pause for human review between phases. Do not begin planning without a spec — planning without one produces tasks that solve the wrong problem.
 
 Find the spec at `spec/NNN-slug/NNN-slug-specify.md` (naming convention from CLAUDE.md). The spec may be a **full spec** (with Functional Requirements FR-N, Tech Stack, Boundaries, etc.) or a **lightweight spec** (Objective, Success Criteria, Out of Scope only). Adjust your approach accordingly — lightweight specs have no FR-N items; use Success Criteria as the source of truth for task coverage instead.
 
 ## When to Use
 
-- A spec exists and has been approved by the human
+- A spec exists (direction confirmed through Q&A in `spec-driven-development`)
 - Work feels too expansive to start without breaking it down
 - Multiple agents or sessions need to parallelize work
 - The implementation sequence is not obvious
@@ -32,9 +32,7 @@ Before writing any tasks, produce a technical implementation plan.
 
 **Step 4 — Note risks.** For each major component, note what could go wrong and how to detect it early.
 
-**Step 5 — Define checkpoints.** Identify natural review points between phases where the human can validate direction before work continues.
-
-The plan should be human-reviewable: the human should be able to read it and say "yes, that's the right approach" or "no, change X."
+**Step 5 — Define task boundaries.** Identify where one task ends and the next begins so each is independently implementable and approvable.
 
 ## Phase 3: Tasks
 
@@ -73,7 +71,7 @@ Break the approved plan into discrete, implementable tasks.
 
 ## Quality Gate
 
-Before handing off to `incremental-implementation`, verify:
+Self-check before writing `implement.md` — do not pause for human review here:
 
 - [ ] Every spec functional requirement (FR-N) maps to at least one task *(skip for lightweight specs — verify against Success Criteria instead)*
 - [ ] Every task has acceptance criteria and a verification step
