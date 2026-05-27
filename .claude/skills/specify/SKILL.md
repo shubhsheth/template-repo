@@ -1,5 +1,5 @@
 ---
-name: spec-driven-development
+name: specify
 
 description: Creates specs before coding. Use when starting a new project, feature, or significant change and no specification exists yet. Use when requirements are unclear, ambiguous, or only exist as a vague idea.
 ---
@@ -33,11 +33,11 @@ This skill owns the **SPECIFY** phase. It runs in two stages:
    [iterates]──→ specify.md ──→ tasks.md ──→ implement.md
         │                                         │
       Human                                       ▼
-    confirms                          incremental-implementation
+    confirms                          implement
     direction                         (per-task approval gate)
 ```
 
-Hand off to `incremental-implementation` once all three files are written. The next human gate is per-task during implementation, not between spec files.
+Hand off to `implement` once all three files are written. The next human gate is per-task during implementation, not between spec files.
 
 ## Choose: Full Spec or Lightweight Spec
 
@@ -238,7 +238,7 @@ The spec is a living document, not a one-time artifact:
 - **Commit the spec** — The spec belongs in version control alongside the code.
 - **Reference the spec in PRs** — Link back to the spec section that each PR implements.
 
-See also: `incremental-implementation` has a per-increment spec drift checkpoint that keeps the spec current during execution.
+See also: `implement` has a per-increment spec drift checkpoint that keeps the spec current during execution.
 
 ## Common Rationalizations
 
@@ -275,4 +275,4 @@ See also: `incremental-implementation` has a per-increment spec drift checkpoint
 - [ ] Out of Scope section exists with at least one explicit exclusion
 - [ ] Boundaries (Always/Ask First/Never) are defined
 
-After `tasks.md` and `implement.md` are written, hand off directly to `incremental-implementation`. No further human gate here — approval happens per-task during implementation.
+After `tasks.md` and `implement.md` are written, hand off directly to `implement`. No further human gate here — approval happens per-task during implementation.

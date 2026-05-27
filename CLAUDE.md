@@ -8,7 +8,7 @@ Behavioral guidelines to reduce common LLM coding mistakes. Merge with project-s
 
 **Before implementing any feature, run the spec skill.**
 
-Invoke the `spec-driven-development` skill before writing any code for new features. The skill defines when a full spec, a lightweight spec, or no spec is needed — defer to its **When to Use** criteria rather than applying it unconditionally.
+Invoke the `specify` skill before writing any code for new features. The skill defines when a full spec, a lightweight spec, or no spec is needed — defer to its **When to Use** criteria rather than applying it unconditionally.
 
 The workflow has three interaction modes:
 1. **Clarify** — ask the human questions conversationally to establish direction and scope before writing anything

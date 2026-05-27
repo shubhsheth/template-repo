@@ -1,17 +1,17 @@
 ---
-name: planning-and-task-breakdown
-description: Decompose a validated spec into an implementation plan and task list. Use after spec-driven-development has produced an approved spec. Owns the PLAN and TASKS phases of the spec-driven workflow.
+name: tasks
+description: Decompose a validated spec into an implementation plan and task list. Use after the specify skill has confirmed direction. Owns the PLAN and TASKS phases of the spec-driven workflow.
 ---
 
 ## Overview
 
-This skill owns the **PLAN** and **TASKS** phases of the spec-driven workflow. It runs as part of the autonomous spec-building pass started by `spec-driven-development` — do not pause for human review between phases. Do not begin planning without a spec — planning without one produces tasks that solve the wrong problem.
+This skill owns the **PLAN** and **TASKS** phases of the spec-driven workflow. It runs as part of the autonomous spec-building pass started by `specify` — do not pause for human review between phases. Do not begin planning without a spec — planning without one produces tasks that solve the wrong problem.
 
 Find the spec at `spec/NNN-slug/NNN-slug-specify.md` (naming convention from CLAUDE.md). The spec may be a **full spec** (with Functional Requirements FR-N, Tech Stack, Boundaries, etc.) or a **lightweight spec** (Objective, Success Criteria, Out of Scope only). Adjust your approach accordingly — lightweight specs have no FR-N items; use Success Criteria as the source of truth for task coverage instead.
 
 ## When to Use
 
-- A spec exists (direction confirmed through Q&A in `spec-driven-development`)
+- A spec exists (direction confirmed through Q&A in `specify`)
 - Work feels too expansive to start without breaking it down
 - Multiple agents or sessions need to parallelize work
 - The implementation sequence is not obvious
