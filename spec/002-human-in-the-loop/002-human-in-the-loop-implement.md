@@ -2,11 +2,11 @@
 
 ## Status
 
-- [ ] Task 1: Revise SPECIFY phase to conversational Q&A model
-- [ ] Task 2: Remove human review gate from planning-and-task-breakdown
-- [ ] Task 3: Add per-task approval gate and cascade procedure to incremental-implementation
-- [ ] Task 4: Update CLAUDE.md workflow description
-- [ ] Task 5: Mark tasks complete in this file
+- [x] Task 1: Revise SPECIFY phase to conversational Q&A model
+- [x] Task 2: Remove human review gate from planning-and-task-breakdown
+- [x] Task 3: Add per-task approval gate and cascade procedure to incremental-implementation
+- [x] Task 4: Update CLAUDE.md workflow description
+- [x] Task 5: Mark tasks complete in this file
 
 ## Cascade Procedure (reference)
 
