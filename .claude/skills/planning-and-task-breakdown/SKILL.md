@@ -7,7 +7,7 @@ description: Decompose a validated spec into an implementation plan and task lis
 
 This skill owns the **PLAN** and **TASKS** phases of the spec-driven workflow. It receives a validated, human-approved spec from `spec-driven-development` as its input. Do not begin planning without a spec — planning without one produces tasks that solve the wrong problem.
 
-Find the spec at `spec/NNN-slug/NNN-slug-requirements.md` (naming convention from CLAUDE.md). The spec may be a **full spec** (with Functional Requirements FR-N, Tech Stack, Boundaries, etc.) or a **lightweight spec** (Objective, Success Criteria, Out of Scope only). Adjust your approach accordingly — lightweight specs have no FR-N items; use Success Criteria as the source of truth for task coverage instead.
+Find the spec at `spec/NNN-slug/NNN-slug-specify.md` (naming convention from CLAUDE.md). The spec may be a **full spec** (with Functional Requirements FR-N, Tech Stack, Boundaries, etc.) or a **lightweight spec** (Objective, Success Criteria, Out of Scope only). Adjust your approach accordingly — lightweight specs have no FR-N items; use Success Criteria as the source of truth for task coverage instead.
 
 ## When to Use
 

@@ -14,7 +14,7 @@ Invoke the `spec-driven-development` skill before writing any code for new featu
 
 - Live under `spec/` at the repo root
 - Each feature: `spec/NNN-slug/`
-- Files: `NNN-slug-{requirements,plan,implement}.md`
+- Files: `NNN-slug-{specify,tasks,implement}.md`
 - Increment NNN for each new feature (001, 002, 003…)
 
 ## 1. Think Before Coding
