@@ -10,16 +10,44 @@ This document outlines a disciplined approach to building features in small, tes
 
 The implementation phase follows specification, planning, and task breakdown. Work must proceed through established phase layers—completing setup before foundation work, foundation before core features—without skipping ahead to incomplete levels.
 
+## Per-Task Approval Gate
+
+Before executing any task, present a summary to the human and wait for explicit approval. Use this format exactly:
+
+```
+**Task N of N — awaiting approval**
+
+**What:** [one sentence describing the task]
+
+**Specifically:**
+- [what will change and why]
+- [any non-obvious implications]
+
+**Files touched:** [list]
+
+Approve or reject?
+```
+
+**On approval:** proceed with the increment cycle below.
+
+**On rejection:** do not implement. Instead:
+1. Revise the approach in `implement.md`
+2. Update `tasks.md` if the rejection changes the task breakdown or ordering
+3. Update `specify.md` if the rejection reveals a scope or requirement change
+4. Re-present the revised task summary before proceeding
+
+Cascade changes through all three spec files before re-presenting — never re-present the same rejected approach.
+
 ## The Increment Cycle
 
-Each slice follows this pattern:
+After approval, execute the task:
 
 1. Implement the smallest complete piece
 2. Run the test suite
 3. Confirm the slice works as expected
 4. Commit with a descriptive message
 5. Check spec drift: if a spec file exists (`spec/NNN-slug/`) and this increment changed any assumption, boundary, or requirement, update the spec file and notify the human before proceeding to the next slice
-6. Proceed to the next slice
+6. Present the next task summary and wait for approval
 
 ## Slicing Approaches
 
