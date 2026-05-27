@@ -1,3 +1,8 @@
+---
+name: implement
+description: Execute a task list incrementally. Use after the tasks skill has produced an approved implement.md. Owns the IMPLEMENT phase of the spec-driven workflow.
+---
+
 # Incremental Implementation Guide
 
 This document outlines a disciplined approach to building features in small, testable increments rather than large, monolithic changes.
