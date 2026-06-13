@@ -77,3 +77,7 @@ After approval, execute the task:
 ## Critical Gate
 
 Task completion requires validating acceptance criteria explicitly—not merely passing tests, which only prove code does what it does, not what the specification requires.
+
+## Handoff
+
+Once every task in `tasks.md` is checked off, hand off to the `ship` skill to open the PR and run the CI/review loop.
