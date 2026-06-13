@@ -10,10 +10,11 @@ Behavioral guidelines to reduce common LLM coding mistakes. Merge with project-s
 
 Invoke the `specify` skill before writing any code for new features. The skill defines when a full spec, a lightweight spec, or no spec is needed — defer to its **When to Use** criteria rather than applying it unconditionally.
 
-The workflow has three interaction modes:
+The workflow has four interaction modes:
 1. **Clarify** — ask the human questions conversationally to establish direction and scope before writing anything
 2. **Build** — once direction is confirmed, write all three spec files autonomously without pausing for review between them
 3. **Implement** — execute one task at a time; present a summary and wait for human approval before each task; on rejection, cascade changes through all three spec files and re-present
+4. **Ship** — once every task in `tasks.md` is checked off, open the PR, monitor CI, and run a spec-compliance/cleanliness review loop (via the `ship` skill) until the PR is green and review-clean
 
 ### Spec File Naming & Structure
 
